@@ -1,0 +1,60 @@
+<div class="card wrap">
+  <div class="hero">
+    <div class="glow"></div>
+    <div class="hleft">
+      <h2>
+        Explore des livres
+        <span class="grad">Computer</span>
+      </h2>
+      <p>Filtre par titre et année, puis ouvre un livre pour voir les détails (cover + description).</p>
+    </div>
+
+    <div class="hright">
+      <div class="badge">
+        <span class="material-symbols-rounded">bolt</span>
+        Premium Feature
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="field">
+      <label>
+        <span class="material-symbols-rounded">search</span>
+        Titre
+      </label>
+      <div class="input">
+        <span class="material-symbols-rounded" style="color:rgba(166,179,214,.9)">text_fields</span>
+        <input
+          type="text"
+          placeholder="Ex: C Programming Language..."
+          [(ngModel)]="title"
+          (input)="emitCriteria()"
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>
+        <span class="material-symbols-rounded">event</span>
+        Année (1ère édition)
+      </label>
+      <div class="input">
+        <span class="material-symbols-rounded" style="color:rgba(166,179,214,.9)">calendar_month</span>
+        <input
+          type="number"
+          placeholder="Ex: 1978"
+          [(ngModel)]="yearText"
+          (input)="emitCriteria()"
+        />
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn ghost" type="button" (click)="onReset()">
+        <span class="material-symbols-rounded">restart_alt</span>
+        Réinitialiser
+      </button>
+    </div>
+  </div>
+</div>

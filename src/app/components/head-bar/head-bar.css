@@ -1,0 +1,64 @@
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(7,10,20,.55);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding: 14px 0;
+}
+
+.left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(135deg, rgba(124,92,255,.92), rgba(32,211,255,.78));
+  box-shadow: 0 16px 40px rgba(124,92,255,.25);
+  border: 1px solid rgba(255,255,255,.18);
+}
+.logo .material-symbols-rounded{
+  font-size: 22px;
+}
+
+.titles h1{
+  margin:0;
+  font-size: 18px;
+  letter-spacing: .2px;
+}
+.titles p{
+  margin:3px 0 0;
+  font-size: 13px;
+  color: rgba(166,179,214,.95);
+}
+
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: rgba(234,240,255,.92);
+  transition: transform .12s ease, border-color .12s ease, filter .12s ease;
+}
+.chip:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  border-color: rgba(124,92,255,.40);
+}

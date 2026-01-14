@@ -1,0 +1,120 @@
+.wrap{
+  display:grid;
+  gap: 14px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.panel{ padding: 16px; }
+.layout{
+  display:grid;
+  grid-template-columns: 360px 1fr;
+  gap: 16px;
+}
+
+.left{ display:grid; gap: 12px; align-content:start; }
+.right{ display:grid; gap: 10px; }
+
+.cover{
+  width:100%;
+  height: 520px;
+  border-radius: 18px;
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.20);
+  display:grid;
+  place-items:center;
+  box-shadow: 0 22px 70px rgba(0,0,0,.55);
+}
+.cover img{ width:100%; height:100%; object-fit: cover; }
+
+.noCover{
+  display:grid;
+  place-items:center;
+  gap: 10px;
+  color: rgba(166,179,214,.95);
+}
+
+.title{
+  margin:0;
+  font-size: clamp(22px, 2.4vw, 34px);
+  letter-spacing: .2px;
+}
+.subtitle{
+  margin:0;
+  color: rgba(166,179,214,.95);
+}
+
+.h3{
+  margin: 0;
+  font-size: 14px;
+  color: rgba(234,240,255,.92);
+  letter-spacing: .2px;
+}
+
+.desc{
+  margin:0;
+  line-height: 1.65;
+  color: rgba(234,240,255,.92);
+}
+
+.mini{ display:flex; flex-wrap:wrap; gap: 10px; }
+
+.subjects{ margin-top: 6px; }
+.chips{ display:flex; flex-wrap:wrap; gap: 8px; }
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  color: rgba(234,240,255,.90);
+  font-size: 12px;
+}
+.chip .material-symbols-rounded{ font-size: 16px; color: rgba(166,179,214,.95); }
+
+.raw summary{
+  cursor:pointer;
+  color: rgba(166,179,214,.95);
+}
+pre{
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: rgba(0,0,0,.25);
+  border: 1px solid rgba(255,255,255,.10);
+  padding: 12px;
+  border-radius: 14px;
+  max-height: 320px;
+  overflow:auto;
+}
+
+.state{
+  padding: 18px;
+  display:flex;
+  align-items:flex-start;
+  gap: 14px;
+}
+.state .icon{
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display:grid;
+  place-items:center;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+}
+.state.error h3{ margin:0 0 6px; color: #ff8aa0; }
+.muted{ color: rgba(166,179,214,.95); margin: 0; }
+
+@media (max-width: 980px){
+  .layout{ grid-template-columns: 1fr; }
+  .cover{ height: 420px; }
+}

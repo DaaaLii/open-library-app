@@ -1,0 +1,134 @@
+<section>
+  <app-search-bar (criteriaChange)="onCriteriaChange($event)" (reset)="onReset()"></app-search-bar>
+
+  <div class="topline">
+    <div class="left">
+      <div class="titleRow">
+        <h2>Catalogue</h2>
+        <span class="pill">
+          <span class="material-symbols-rounded">memory</span>
+          computers
+        </span>
+      </div>
+
+      <p class="muted" *ngIf="!loading && !error">
+        Affichés: <b>{{ filtered.length }}</b> • Chargés: <b>{{ booksList.length }}</b> • Total OpenLibrary:
+        <b>{{ workCount }}</b>
+      </p>
+    </div>
+
+    <div class="right" *ngIf="!loading && !error">
+      <div class="pager">
+        <button class="btn ghost" (click)="prev()" [disabled]="page<=1">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </button>
+
+        <div class="pageInfo">Page <b>{{ page }}</b> / {{ totalPages() }}</div>
+
+        <button class="btn ghost" (click)="next()" [disabled]="page>=totalPages()">
+          <span class="material-symbols-rounded">chevron_right</span>
+        </button>
+
+        <select class="select" [(ngModel)]="pageSize" (change)="page=1">
+          <option [ngValue]="12">12</option>
+          <option [ngValue]="24">24</option>
+          <option [ngValue]="36">36</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="grid">
+    <div class="card item" *ngFor="let _ of [1,2,3,4,5,6,7,8,9,10,11,12]">
+      <div class="cover skeleton"></div>
+      <div class="meta">
+        <div class="line skeleton"></div>
+        <div class="line skeleton small"></div>
+        <div class="chips">
+          <div class="chip skeleton"></div>
+          <div class="chip skeleton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!loading && error" class="card state error">
+    <div class="icon">
+      <span class="material-symbols-rounded">error</span>
+    </div>
+    <div>
+      <h3>Erreur</h3>
+      <p class="muted">{{ error }}</p>
+      <button class="btn primary" (click)="fetch()">
+        <span class="material-symbols-rounded">refresh</span>
+        Réessayer
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!loading && !error && filtered.length === 0" class="card state empty">
+    <div class="icon">
+      <span class="material-symbols-rounded">search_off</span>
+    </div>
+    <div>
+      <h3>Aucun résultat</h3>
+      <p class="muted">Essaie un autre titre, ou enlève le filtre d’année.</p>
+      <button class="btn ghost" (click)="onReset()">
+        <span class="material-symbols-rounded">restart_alt</span>
+        Réinitialiser
+      </button>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div *ngIf="!loading && !error && filtered.length > 0" class="grid">
+    <a
+      class="card item"
+      *ngFor="let book of paged(); trackBy: trackByKey"
+      (click)="openDetails(book)"
+      role="button"
+      tabindex="0"
+    >
+      <div class="cover">
+        <div class="shine"></div>
+
+        <img
+          *ngIf="coverUrl(book); else noCover"
+          [src]="coverUrl(book)"
+          [alt]="book.title"
+          loading="lazy"
+          (error)="onImgError($event)"
+        />
+
+        <ng-template #noCover>
+          <div class="noCover">
+            <span class="material-symbols-rounded">image_not_supported</span>
+            <span>NO COVER</span>
+          </div>
+        </ng-template>
+
+        <div class="corner">
+          <span class="material-symbols-rounded">open_in_new</span>
+        </div>
+      </div>
+
+      <div class="meta">
+        <h3 class="bookTitle" [title]="book.title">{{ book.title }}</h3>
+
+        <div class="chips">
+          <span class="chip">
+            <span class="material-symbols-rounded">event</span>
+            {{ book.first_publish_year || '—' }}
+          </span>
+          <span class="chip">
+            <span class="material-symbols-rounded">menu_book</span>
+            {{ book.edition_count }} éd.
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>

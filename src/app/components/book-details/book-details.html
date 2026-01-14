@@ -1,0 +1,90 @@
+<section class="wrap">
+  <div class="top">
+    <button class="btn ghost" (click)="back()">
+      <span class="material-symbols-rounded">arrow_back</span>
+      Retour
+    </button>
+
+    <a class="btn primary" [href]="openLibraryUrl()" target="_blank" rel="noopener">
+      <span class="material-symbols-rounded">open_in_new</span>
+      OpenLibrary
+    </a>
+  </div>
+
+  <div *ngIf="loading" class="card panel">
+    <div class="left">
+      <div class="cover skeleton"></div>
+      <div class="skeleton" style="height:18px;width:70%"></div>
+      <div class="skeleton" style="height:14px;width:50%"></div>
+    </div>
+    <div class="right">
+      <div class="skeleton" style="height:28px;width:80%"></div>
+      <div class="skeleton" style="height:16px;width:55%"></div>
+      <hr class="sep">
+      <div class="skeleton" style="height:14px;width:100%"></div>
+      <div class="skeleton" style="height:14px;width:92%"></div>
+      <div class="skeleton" style="height:14px;width:86%"></div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && error" class="card state error">
+    <div class="icon"><span class="material-symbols-rounded">error</span></div>
+    <div>
+      <h3>Erreur</h3>
+      <p class="muted">{{ error }}</p>
+      <a class="btn primary" routerLink="/">
+        <span class="material-symbols-rounded">home</span>
+        Retour accueil
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && book" class="card panel layout">
+    <div class="left">
+      <div class="cover">
+        <img *ngIf="coverUrl(); else noCover" [src]="coverUrl()" [alt]="title()">
+        <ng-template #noCover>
+          <div class="noCover">
+            <span class="material-symbols-rounded">image_not_supported</span>
+            Sans cover
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="mini">
+        <span class="badge">
+          <span class="material-symbols-rounded">tag</span>
+          ID: {{ id }}
+        </span>
+      </div>
+    </div>
+
+    <div class="right">
+      <h1 class="title">{{ title() }}</h1>
+      <p class="subtitle" *ngIf="subtitle()">{{ subtitle() }}</p>
+
+      <hr class="sep">
+
+      <h3 class="h3">Description</h3>
+      <p class="desc" *ngIf="desc(); else noDesc">{{ desc() }}</p>
+      <ng-template #noDesc>
+        <p class="muted">Aucune description disponible.</p>
+      </ng-template>
+
+      <div *ngIf="subjects().length" class="subjects">
+        <h3 class="h3">Sujets</h3>
+        <div class="chips">
+          <span class="chip" *ngFor="let s of subjects()">
+            <span class="material-symbols-rounded">label</span>
+            {{ s }}
+          </span>
+        </div>
+      </div>
+
+      <details class="raw">
+        <summary>Voir le JSON brut</summary>
+        <pre>{{ book | json }}</pre>
+      </details>
+    </div>
+  </div>
+</section>
